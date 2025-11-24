@@ -63,4 +63,47 @@ document.getElementById("form-pdf").addEventListener("submit", function (e) {
     "por chamada de vídeo (videoconferência) nas assembleias do condomínio.";
 
   const textoFinal =
-    "Solicito que esta pauta conste
+    "Solicito que esta pauta conste de forma expressa na convocação e " +
+    "seja submetida à apreciação e votação dos condôminos presentes.";
+
+  const introQuebrado = doc.splitTextToSize(linhasIntro, 170);
+  doc.text(introQuebrado, margemEsquerda, posY);
+  posY += introQuebrado.length * 6 + 6;
+
+  const pautaQuebrado = doc.splitTextToSize(textoPauta, 170);
+  doc.setFont("Helvetica", "bold");
+  doc.text("Pauta a ser incluída:", margemEsquerda, posY);
+  posY += 7;
+  doc.setFont("Helvetica", "normal");
+  doc.text(pautaQuebrado, margemEsquerda + 4, posY);
+  posY += pautaQuebrado.length * 6 + 8;
+
+  const finalQuebrado = doc.splitTextToSize(textoFinal, 170);
+  doc.text(finalQuebrado, margemEsquerda, posY);
+  posY += finalQuebrado.length * 6 + 16;
+
+  doc.text(`${cidade}, ${dataHojeBR}`, margemEsquerda, posY);
+  posY += 25;
+
+  // Linha para assinatura
+  const larguraLinha = 80;
+  const xCentro = margemEsquerda + larguraLinha / 2;
+  const xInicio = margemEsquerda;
+  const xFim = margemEsquerda + larguraLinha;
+
+  doc.line(xInicio, posY, xFim, posY);
+  posY += 6;
+
+  doc.setFontSize(10);
+  doc.text("Assinatura do condômino", xCentro, posY, { align: "center" });
+
+  const nomeLimpo = nome
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  const arquivo = `pauta-videoconferencia-${nomeLimpo || "condomino"}.pdf`;
+
+  doc.save(arquivo);
+});
