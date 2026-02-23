@@ -3,7 +3,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Gerar PDF - Pauta Videoconferência</title>
+  <title>Gerador de PDF - Solicitação assembleias híbridas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
   <!-- jsPDF via CDN -->
@@ -11,10 +11,10 @@
 </head>
 <body>
   <div class="container">
-    <h1>Gerar PDF para assinatura</h1>
+    <h1>Gerador de PDF - Solicitação assembleias híbridas</h1>
     <p class="subtitle">
-      Preencha os dados abaixo para gerar um PDF com a pauta de
-      utilização de chamadas de vídeo nas assembleias.
+      Preencha os dados abaixo para gerar o PDF da carta de solicitação de
+      assembleias em formato presencial e on-line (híbrido).
     </p>
 
     <form id="form-pdf">
@@ -57,13 +57,23 @@
             required
           />
         </div>
+
+        <div class="form-group">
+          <label for="telefone">Telefone</label>
+          <input
+            type="text"
+            id="telefone"
+            name="telefone"
+            placeholder="Ex: (61) 99999-9999"
+          />
+        </div>
       </div>
 
       <button type="submit" class="btn">Gerar PDF</button>
     </form>
 
     <p class="footer">
-      O PDF será baixado automaticamente com o texto pronto para impressão e assinatura.
+      O PDF será baixado automaticamente com o texto pronto para impressão e assinatura. O mesmo será válido para todas as assembleias do condomínio.
     </p>
   </div>
 
